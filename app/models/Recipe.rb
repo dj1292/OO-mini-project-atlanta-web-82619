@@ -1,22 +1,27 @@
 class Recipe 
 
-attr_reader :name, :ingredient, :recipe_card
+attr_reader :name
 
     @@all = []
 
-    def initialize(name, ingredient)
+    def initialize(name)
         @name = name 
-        @ingredient = ingredient
-        @recipe_card = recipe_card
         @@all << self 
     end 
 
-  
-
-    end
-
     def self.all
         @@all 
+    end 
+
+    def self.most_popular
+        recipes = RecipeCard.all.map do |rcard|
+            rcard.recipe
+        end 
+        recipes.max_by {|recipe| recipes.count(recipe)}
+    end 
+
+    def users
+        RecipeCard.all.select {|rcard| rcard.recipe == self}.map {|rcard| rcard.user}
     end 
 
 

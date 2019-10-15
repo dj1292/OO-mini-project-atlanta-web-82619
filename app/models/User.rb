@@ -12,7 +12,7 @@ class User
         @@all
     end 
 
-    def recipe_card
+    def recipe_cards
         #return all of the recipe cards for this user
         RecipeCard.all.select do |rcard|
             rcard.user == self
@@ -20,11 +20,21 @@ class User
     end
 
     def recipes
-        recipe_card.select {|recipe_card| recipe_card.user == self }
+        recipe_cards.map do |rcard|
+            rcard.recipe
+        end 
     end 
 
-    def add_recipe_card(recipe, date,rating)
-        RecipeCard.new(self, recipe, date, rating)
+    def add_recipe_card(date, rating, recipe)
+        RecipeCard.new(date, rating, self, recipe)
+    end 
+
+    def declare_allergy(ingredient)
+        Allergy.new(self, ingredient)
+    end 
+
+    def allergens
+        Allergy.all.select {|allergy| allergy.user == self}
     end 
 
 

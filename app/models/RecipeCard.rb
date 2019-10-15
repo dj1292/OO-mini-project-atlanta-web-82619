@@ -1,7 +1,7 @@
 class RecipeCard
 
-    attr_reader :date, :rating, :recipe
-    attr_accessor :user 
+    attr_reader :user, :date, :rating, :recipe
+    
 
     @@all = []
 
@@ -9,6 +9,7 @@ class RecipeCard
         @date = date 
         @rating = rating 
         @user = user 
+        @recipe = recipe 
         @@all << self 
     end 
 
@@ -16,8 +17,6 @@ class RecipeCard
         @@all 
     end 
 
-    def date
-        
-    end 
+    
 
 end 
